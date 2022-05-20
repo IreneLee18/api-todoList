@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="todolist">
+  <meta name="author" content="Irene">
+  <meta property="og:title" content="todolist" />
+  <meta property="og:description" content="todolist" />
+  <link rel="icon" type="image/x-icon" href="image/todo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="scss/all.css">
+  <title>all</title>
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- login -->
+    <div class="login" v-if="currentPage==='login'">
+      <div class="container">
+        <div class="row justify-content-center pt-11">
+          <div class="col-12 col-lg-6 text-center">
+            <img class="mb-3" src="image/logo_lg.png" alt="logo">
+            <img class="d-none d-lg-inline" src="image/done.png" alt="done">
+          </div>
+          <div class="col-12 col-md-9 col-lg-6 fw-bold">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col col-md-10">
+                  <h1 class="fs-3 fw-bold py-4 pt-lg-8 text-center text-lg-start">最實用的線上代辦事項服務</h1>
+                  <form>
+                    <div class="input-group-lg d-flex flex-column">
+                      <label class="lh-lg" for="Email">
+                        Email
+                      </label>
+                      <input class="py-3 ps-3 mb-2 rounded border-0" v-model="email" placeholder="請輸入Email" id="Email"
+                        type="email">
+                      <div class="invalid-feedback" :class="{'d-block':emailError}">
+                        請輸入正確格式
+                      </div>
+                    </div>
+                    <div class="input-group-lg d-flex flex-column">
+                      <label class="lh-lg" for="password">
+                        密碼
+                      </label>
+                      <input class="py-3 ps-3 mb-2 rounded border-0" v-model="password" placeholder="請輸入密碼"
+                        autocomplete="off" id="password" type="password">
+                      <div class="invalid-feedback" :class="{'d-block':passwordError}">
+                        請輸入正確密碼
+                      </div>
+                    </div>
+                  </form>
+                  <div class="w-25 mx-auto mt-2 mt-md-0 d-flex flex-column justify-content-center">
+                    <button class="btn btn-secondary my-3" @click="login">登入</button>
+                    <a @click="switchPage" class="text-center fw-normal" style="cursor: pointer;">註冊帳號</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center mt-6">
+            <img class="d-none d-md-inline d-lg-none" src="image/done.png" alt="done">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- register -->
+    <div class="register" v-if="currentPage==='register'">
+      <div class="container">
+        <div class="row justify-content-center pt-3 pt-md-5 pt-lg-11">
+          <div class="col-12 col-lg-6 text-center">
+            <img class="mb-3 mb-md-11 mb-lg-3 mt-lg-10" src="image/logo_lg.png" alt="logo">
+            <img class=" d-none d-lg-inline" src="image/done.png" alt="done">
+          </div>
+          <div class="col-12 col-lg-6 fw-bold">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col col-md-10">
+                  <h1 class="fs-3 fw-bold mb-md-4 text-center text-md-start">註冊帳號</h1>
+                  <form>
+                    <div class="input-group-lg d-flex flex-column">
+                      <label class="lh-lg" for="Email">
+                        Email
+                      </label>
+                      <input class="py-3 ps-3 mb-md-2 rounded border-0" required placeholder="請輸入Email" id="Email"
+                        v-model="email" type="email">
+                      <div class="invalid-feedback mt-0 mb-md-2" :class="{'d-block':emailError}">
+                        請輸入正確格式
+                      </div>
+                    </div>
+                    <div class="input-group-lg d-flex flex-column">
+                      <label class="lh-lg" for="name">
+                        您的暱稱
+                      </label>
+                      <input class="py-3 ps-3 mb-md-2 rounded border-0" required placeholder="請輸入您的暱稱" id="name"
+                        v-model="userName" type="text">
+                      <div class="invalid-feedback mt-0 mb-md-2" :class="{'d-block':userNameError}">
+                        此欄位不得為空
+                      </div>
+                    </div>
+                    <div class="input-group-lg d-flex flex-column">
+                      <label class="lh-lg" for="password">
+                        密碼
+                      </label>
+                      <input class="py-3 ps-3 mb-md-2 rounded border-0" required placeholder="請輸入密碼" autocomplete="off"
+                        id="password" v-model="password" type="password">
+                      <div class="invalid-feedback mt-0 mb-md-2" :class="{'d-block':passwordError}">
+                        請設定６碼以上
+                      </div>
+                    </div>
+                    <div class="input-group-lg d-flex flex-column">
+                      <label class="lh-lg" for="again-password">
+                        再次輸入密碼
+                      </label>
+                      <input class="py-3 ps-3 mb-md-2 rounded border-0" required placeholder="請再次輸入密碼"
+                        autocomplete="off" id="again-password" v-model="passwordAgain" type="password">
+                      <div class="invalid-feedback mt-0 mb-md-2" :class="{'d-block':passwordAgainError}">
+                        密碼不一致
+                      </div>
+                    </div>
+                  </form>
+
+                  <div class="w-50 mx-auto d-flex flex-column justify-content-center">
+                    <button type="button" class="btn btn-secondary mt-3 my-md-3" @click="register">註冊帳號</button>
+                    <button @click="switchPage" class="btn">登入</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- todoList -->
+    <div class="todoList" v-if="currentPage==='todoList'">
+      <header class="pt-4">
+        <div class="container d-flex align-items-center justify-content-around justify-content-md-between">
+          <img src="image/logo.png" alt="logo">
+          <div>
+            <span class="d-none d-md-inline pe-4 fw-bold">{{myTodoName}}的代辦事項</span>
+            <a class="logout" @click="logout" style="cursor: pointer;">登出</a>
+          </div>
+        </div>
+      </header>
+      <main class="mt-5">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-11 col-md-6">
+              <!-- submit要用form(不太理解為何用背的吧) -->
+              <form class="card d-flex flex-row align-items-center shadow mb-4" @submit.prevent="addList">
+                <input class="w-100 py-3 ps-3 border-0 rounded" type="text" placeholder="新增待辦事項" v-model.trim="newTodo">
+                <button class="bg-white border-0" type="submit">
+                  <img class="me-2" src="image/plus 1.png" alt="plus">
+                </button>
+              </form>
+              <!-- 如果沒任何代辦事項顯示 -->
+              <div class="empty text-center mt-6 mt-md-11" v-if="allData.length===0">
+                <h4 class="mb-4">目前尚無待辦事項</h4>
+                <img src="image/empty.png">
+              </div>
+
+              <!-- 如果沒任何代辦事項隱藏 -->
+              <div class="card-body pb-0 px-0 rounded shadow mb-0 bg-white" v-if="allData.length !==0">
+                <ul class="text-center d-flex list-unstyled mb-0 text-dark fw-bold">
+                  <li class="tab w-100 pb-3 border-bottom border-2" :class="{'tab-active':currentTab===tab}"
+                    v-for="tab in tabs" :key="tab" @click="currentTab=tab">{{tab}}</li>
+                </ul>
+
+                <div class="card-content">
+                  <ul class="list-unstyled"
+                    :class="{'overflow-scroll':selectData.length>=5,'h-365':selectData.length>=5}">
+                    <!-- 在試著想想看要怎麼把每次新增都做到scrollTop -->
+                    <li v-for="item in filterData" :key="item.id">
+                      <label class="checkbox" :for="item.id">
+                        <input class="check" type="checkbox" name="" :id="item.id" v-model="item.completed_at">
+                        <span :class="{'unclick':!item.completed_at}"></span>
+                        <span :class="{'clicked':item.completed_at}"></span>
+                        <span class="d-block border-bottom pb-3 lh-lg" :class="{'checked':item.completed_at}" @click="checkTodo(item.id)">{{
+                          item.content
+                          }}</span>
+                        <input :id="item.id" class="cancel" type="button" value="×" @click="deleteList(item.id)">
+                      </label>
+                    </li>
+                  </ul>
+                  <div
+                    class="d-flex justify-content-between flex-column flex-md-row align-items-center align-items-md-start px-5 pt-2 pb-4">
+                    <p v-if="workData.length !==0">{{workData.length}} 個待完成項目</p>
+                    <p v-if="workData.length ===0">恭喜全部已完成！</p>
+                    <a href="#" class="text-dark" @click="deleteAll">清除已完成項目</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+  </div>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.33/vue.global.min.js'
+    integrity='sha512-nswZG83l1MggaGEAe/zLIbsVpZJUyqv+yg40f2CNp9QH5AOtOsjS4PSdWRDEr/v+R6YPhNJ1gvhDEJDOqh5qxQ=='
+    crossorigin='anonymous'></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="module" src="todolist.js"></script>
+</body>
+
+</html>

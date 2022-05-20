@@ -1,0 +1,123 @@
+input {
+  outline: none;
+}
+
+.login,
+.register,
+.todoList {
+  background: #ffd370;
+  height: 100vh;
+}
+
+
+@media (min-width:768px) {
+  .todoList {
+    // background: linear-gradient(174deg, #ffd370 2%, #ffd370 46%, #ffffff 46%, #ffffff 100%, #e8e8e8 100%);
+    background: linear-gradient(174deg, #ffd370 50%, #fff 50%);
+    background-repeat: no-repeat;
+    height: 60vh;
+  }
+}
+@media (min-width:992px) {
+  .todoList {
+    height: 80vh;
+  }
+}
+
+.h-365 {
+  height: 365px;
+}
+
+.logout:hover {
+  color: #D87355;
+  font-weight: bold;
+}
+
+li {
+  cursor: pointer;
+
+  &:hover {
+    border-color: #9F9A91 !important;
+  }
+}
+
+.tab-active {
+  border-color: #333333 !important;
+  color: #333333 !important;
+}
+
+.checkbox {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+
+  .check {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 40%;
+  }
+
+  .unclick {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: -2.5rem;
+      top: 2rem;
+      background: #FFFFFF;
+      border: 1px solid #9F9A91;
+      border-radius: 5px;
+    }
+  }
+
+  .clicked {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 15px;
+      left: -10.5rem;
+      top: 2rem;
+      transform: rotate(314deg);
+      border-bottom: 4px solid #FFD370;
+      border-left: 4px solid #FFD370;
+      border-radius: 15%;
+      background: #FFFFFF;
+    }
+  }
+
+  span {
+    margin: 0 4rem;
+
+  }
+
+  .checked {
+    text-decoration-line: line-through;
+    color: #9F9A91;
+  }
+
+  .cancel {
+    opacity: 0;
+    position: absolute;
+    right: -1rem;
+    top: 25%;
+    margin: 0 2rem;
+    background: #fff;
+    border: none;
+    font-size: 24px;
+
+    &:hover {
+      color: #D87355;
+    }
+  }
+
+  &:hover .cancel {
+    opacity: 1;
+  }
+}
