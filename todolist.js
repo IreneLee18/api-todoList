@@ -183,10 +183,10 @@ const app = Vue.createApp({
           console.log("deleteAll", res);
         })
         .catch((err) => console.log(err.response));
-      for (let i = 1; i <= this.deleteData.length; i++) {
+      for (let i = 0; i < this.deleteData.length; i++) {
         console.log(i);
         axios
-          .delete(`${this.apiUrl}/todos/${this.deleteData[i - 1]}`)
+          .delete(`${this.apiUrl}/todos/${this.deleteData[i]}`)
           .then((res) => {
             this.renderData();
             this.deleteData = [];
